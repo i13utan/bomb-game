@@ -6,19 +6,19 @@
     <title>AI時限爆弾ゲーム</title>
 
     <!-- PWA -->
-    <link rel="manifest" href="/bomb-game/manifest.json" />
+    <link rel="manifest" href="./manifest.json" />
     <meta name="theme-color" content="#1a1a2e" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="AI爆弾" />
-    <link rel="apple-touch-icon" href="/bomb-game/icon.svg" />
+    <link rel="apple-touch-icon" href="./icon.svg" />
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <script type="module" src="./src/main.jsx"></script>
     <script>
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/bomb-game/sw.js')
+        navigator.serviceWorker.register('./sw.js')
       }
     </script>
   </body>
