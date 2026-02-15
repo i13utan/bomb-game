@@ -5,8 +5,43 @@ let currentSessionId = 0
 
 // Mode presets for voice personality
 const modePresets = {
-  friend: { rate: 1.15, pitch: 1.1 },  // Fast, provocative
-  pink:   { rate: 0.88, pitch: 0.85 },  // Slow, sultry
+  friend: { rate: 1.1, pitch: 1.2 },   // Bright, cheerful
+  pink:   { rate: 0.95, pitch: 1.35 },  // Soft, cute, slightly higher
+}
+
+// Preferred Japanese female voices (order = priority)
+const preferredVoiceNames = [
+  'Google 日本語',
+  'Kyoko',
+  'O-Ren',
+  'Haruka',
+  'Microsoft Nanami',
+  'Nanami',
+]
+
+/**
+ * Pick the best Japanese female voice available.
+ * Priority: preferredVoiceNames list > any ja female voice > any ja voice > default
+ */
+function pickJapaneseVoice() {
+  const voices = window.speechSynthesis.getVoices()
+  const jaVoices = voices.filter(v => v.lang.startsWith('ja'))
+
+  // 1. Try preferred names first (in priority order)
+  for (const name of preferredVoiceNames) {
+    const found = jaVoices.find(v => v.name.includes(name))
+    if (found) return found
+  }
+
+  // 2. Try to find a female-sounding voice (heuristic: name contains female indicators)
+  const femaleHints = /female|女|kyoko|haruka|nanami|misaki|o-ren/i
+  const female = jaVoices.find(v => femaleHints.test(v.name))
+  if (female) return female
+
+  // 3. Fall back to any Japanese voice
+  if (jaVoices.length > 0) return jaVoices[0]
+
+  return null
 }
 
 /**
@@ -49,11 +84,10 @@ export function speakQuestion(text, mode = 'friend') {
       const pitchWobble = (Math.random() - 0.5) * 0.15
       utterance.pitch = Math.max(0.5, Math.min(2.0, preset.pitch + pitchWobble))
 
-      // Try to use a Japanese voice
-      const voices = window.speechSynthesis.getVoices()
-      const jaVoice = voices.find(v => v.lang.startsWith('ja'))
-      if (jaVoice) {
-        utterance.voice = jaVoice
+      // Pick the best Japanese female voice
+      const voice = pickJapaneseVoice()
+      if (voice) {
+        utterance.voice = voice
       }
 
       window.speechSynthesis.speak(utterance)
