@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bomb-green: #22c55e;
+  --color-bomb-yellow: #eab308;
+  --color-bomb-red: #ef4444;
+  --color-bomb-dark: #1a1a2e;
+  --color-bomb-purple: #6d28d9;
+  --color-bomb-pink: #ec4899;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Segoe UI', 'Hiragino Sans', 'Meiryo', sans-serif;
+  overflow: hidden;
+  background: var(--color-bomb-dark);
+  color: white;
+  user-select: none;
+}
+
+#root {
+  width: 100dvw;
+  height: 100dvh;
+}
+
+/* Pulse animation for timer warning */
+@keyframes pulse-warning {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.animate-pulse-warning {
+  animation: pulse-warning 0.5s ease-in-out infinite;
+}
+
+/* Blink animation for critical timer */
+@keyframes blink-critical {
+  0%, 100% { opacity: 1; background-color: rgba(239, 68, 68, 0.3); }
+  50% { opacity: 0.6; background-color: rgba(239, 68, 68, 0.7); }
+}
+
+.animate-blink-critical {
+  animation: blink-critical 0.25s ease-in-out infinite;
+}
+
+/* Panic-level rapid flash */
+@keyframes blink-panic {
+  0%, 100% { opacity: 1; background-color: rgba(239, 68, 68, 0.5); }
+  50% { opacity: 0.5; background-color: rgba(239, 68, 68, 0.9); }
+}
+
+.animate-blink-panic {
+  animation: blink-panic 0.15s ease-in-out infinite;
+}
+
+/* Explosion animation */
+@keyframes explosion-scale {
+  0% { transform: scale(0); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.8; }
+  100% { transform: scale(3); opacity: 0; }
+}
+
+.animate-explosion {
+  animation: explosion-scale 0.8s ease-out forwards;
+}
+
+/* Particle animation */
+@keyframes particle-fly {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.animate-particle {
+  animation: particle-fly 1.5s ease-out forwards;
+}
+
+/* Shake animation */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Bounce in */
+@keyframes bounce-in {
+  0% { transform: scale(0.3); opacity: 0; }
+  50% { transform: scale(1.05); }
+  70% { transform: scale(0.9); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.6s ease-out;
+}
+
+/* Slide up */
+@keyframes slide-up {
+  0% { transform: translateY(100%); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.4s ease-out;
+}

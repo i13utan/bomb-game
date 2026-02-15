@@ -1,0 +1,18 @@
+{
+  "name": "AI時限爆弾ゲーム",
+  "short_name": "AI爆弾",
+  "description": "飲み会で盛り上がるパーティーゲーム",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1a1a2e",
+  "theme_color": "#1a1a2e",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
